@@ -1,6 +1,7 @@
-fetch('http://localhost:3000/pokemon')
+fetch('./db.json')
     .then(resposta => resposta.json())
-    .then(pokemons => {
+    .then(dados => {
+        const pokemons = dados.pokemon;
         const container = document.getElementById('pokemon-container');
 
         pokemons.forEach(pokemon => {

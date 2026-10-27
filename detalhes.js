@@ -2,23 +2,23 @@
 const parametros = new URLSearchParams(window.location.search);
 const id = parametros.get('id');
 const iconesTipos = {
-    Normal: 'images/Pokémon_Normal_Type_Icon.svg.png',
+    Normal: 'images/Pokémon_Normal_Type_Icon.svg.png',
     Fire: 'images/Type_Fire_HOME.png',
-    Water: 'images/Pokémon_Water_Type_Icon.svg.png',
+    Water: 'images/Pokémon_Water_Type_Icon.svg.png',
     Grass: 'images/grass.png',
-    Electric: 'images/Pokémon_Electric_Type_Icon.svg.png',
-    Ice: 'images/Pokémon_Ice_Type_Icon.svg.png',
+    Electric: 'images/Pokémon_Electric_Type_Icon.svg.png',
+    Ice: 'images/Pokémon_Ice_Type_Icon.svg.png',
     Fighting: 'images/fighting.png',
-    Poison: 'images/Pokémon_Poison_Type_Icon.svg.png',
-    Ground: 'images/Pokémon_Ground_Type_Icon.svg.png',
+    Poison: 'images/Pokémon_Poison_Type_Icon.svg.png',
+    Ground: 'images/Pokémon_Ground_Type_Icon.svg.png',
     Flying: 'images/flying.png',
-    Psychic: 'images/Pokémon_Psychic_Type_Icon.svg.png',
+    Psychic: 'images/Pokémon_Psychic_Type_Icon.svg.png',
     Bug: 'images/bug.png',
     Rock: 'images/rock.png',
     Ghost: 'images/ghost_type_symbol_galar_by_jormxdos_dffvl2d-fullview.png',
     Dark: 'images/darkness_type_symbol_tcg_by_jormxdos_dfgddck-fullview.png',
     Dragon: 'images/dragon_type_symbol_tcg_by_jormxdos_dfgddc1-fullview.png',
-    Steel: 'images/Pokémon_Steel_Type_Icon.svg.png'
+    Steel: 'images/Pokémon_Steel_Type_Icon.svg.png'
 };
 
 function criarLinhaEvolutiva(pokemon) {
@@ -60,9 +60,15 @@ function criarLinhaEvolutiva(pokemon) {
     `;
 }
 
-fetch(`http://localhost:3000/pokemon/${id}`)
+fetch('./db.json')
     .then(resposta => resposta.json())
-    .then(pokemon => {
+    .then(dados => {
+        const pokemon = dados.pokemon.find(pokemon => String(pokemon.id) === id);
+        if (!pokemon) {
+            document.getElementById('pokemon-detalhes').innerHTML =
+                '<p>Pokémon não encontrado. <a href="index.html">Voltar à Pokédex</a></p>';
+            return;
+        }
         document.getElementById('pokemon-detalhes').innerHTML = `
             <div class="card card-detalhes card-pokemon tipo-${pokemon.types[0]?.name.toLowerCase() || 'normal'}">
                 <img
