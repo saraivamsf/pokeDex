@@ -103,31 +103,302 @@ body {
     flex: 1;
     min-height: 0;
     overflow-y: auto;
-    padding: 15px 15px 15px 5%;
-
-    display: flex;
-    gap: 24px;
-    align-items: flex-start;
+    padding: 12px 12px 12px 5%;
+    display: grid;
+    grid-template-columns: minmax(0, 300px) repeat(2, minmax(0, 1fr));
+    grid-template-rows: minmax(0, 1.1fr) minmax(0, 1fr);
+    grid-template-areas:
+        "pokemon tipos atributos"
+        "pokemon estatisticas estatisticas";
+    gap: 16px;
 }
 
 .card-detalhes {
-    width: 600px;
-    max-width: 100%;
-    height: auto;
-    margin-left: 0;
+    width: 100%;
+    height: 100%;
     min-width: 0;
+    min-height: 0;
+    margin: 0;
+    overflow-y: auto;
 }
 
-.card-status {
-    margin-left: auto;
-    width: 480px;
+.card-pokemon { grid-area: pokemon; }
+.card-tipos { grid-area: tipos; }
+.card-status { grid-area: atributos; }
+.card-valores { grid-area: estatisticas; }
+
+.card-detalhes .card-body {
+    padding: 12px;
+    min-height: 0;
+}
+
+.card-detalhes .card-title {
+    font-size: clamp(1.1rem, 2.5vh, 1.5rem);
+}
+
+.card-status .card-body,
+.card-valores .card-body {
+    display: flex;
+    flex-direction: column;
 }
 
 .area-grafico {
     position: relative;
-    height: 300px;
+    flex: 1;
+    min-height: 0;
 }
 
-#pokemon-detalhes > .card-detalhes:not(.card-status) {
-    width: 350px;
+.card-pokemon .card-img-top {
+    height: clamp(80px, 24vh, 210px);
+    min-height: 0;
+    max-height: 38%;
+    object-fit: contain;
+    flex-shrink: 1;
+    transform: translateY(20px);
+}
+
+.card-pokemon .card-body {
+    flex: 0 0 auto;
+}
+
+.card-pokemon .pokemon-id,
+.card-pokemon .card-title {
+    margin-bottom: 4px;
+}
+
+.card-pokemon .card-title {
+    font-size: clamp(1.6rem, 3.5vh, 2.2rem);
+    margin-top: -6px;
+}
+
+.card-pokemon .pokemon-id {
+    margin-bottom: 0;
+}
+
+.familia-evolutiva {
+    margin-top: 12px;
+    font-family: 'Chakra Petch', sans-serif;
+}
+
+.sem-evolucao {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: calc((100% - 16px) / 2.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sem-evolucao img {
+    width: clamp(80px, 16vh, 120px);
+    height: auto;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+.mensagem-sem-evolucao {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    right: 12px;
+    margin: 0;
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 0.85rem;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.mensagem-sem-evolucao::before,
+.mensagem-sem-evolucao::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.familia-evolutiva h3 {
+    margin: 0 0 4px;
+    font-size: 0.8rem;
+}
+
+.linha-evolutiva,
+.evolucoes-alternativas {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    min-width: 0;
+}
+
+.evolucoes-alternativas {
+    gap: 4px;
+}
+
+.evolucao {
+    flex: 0 0 auto;
+    min-width: 0;
+    width: 230px;
+    max-width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    color: inherit;
+    text-decoration: none;
+    font-size: 1rem;
+    line-height: 1.2;
+    border-radius: 6px;
+}
+
+.evolucao img {
+    width: clamp(52px, 9vh, 80px);
+    flex-shrink: 0;
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.evolucao span {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+}
+
+.evolucao-atual {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.evolucao:hover,
+.evolucao:focus-visible {
+    color: inherit;
+    text-decoration: underline;
+}
+
+.seta-evolucao {
+    font-size: 0.8rem;
+    line-height: 1;
+    transform: rotate(90deg);
+}
+
+.tipo-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    margin-top: 20px;
+}
+
+.tipo-icone {
+    width: clamp(64px, 12vh, 100px);
+    height: clamp(64px, 12vh, 100px);
+    object-fit: contain;
+}
+
+.card-tipos .card-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.lista-tipos {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 56px;
+}
+
+.lista-tipos .tipo-item {
+    margin-top: 0;
+}
+
+.grafico-barras {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.atributo {
+    flex: 1;
+    min-width: 0;
+    display: grid;
+    grid-template-rows: 20px minmax(0, 1fr) 36px;
+    justify-items: center;
+    gap: 4px;
+    font-family: 'Chakra Petch', sans-serif;
+    font-weight: 700;
+}
+
+.barra-fundo {
+    display: flex;
+    align-items: flex-end;
+    width: 100%;
+    max-width: 55px;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.barra-valor {
+    width: 100%;
+    background-color: var(--cor-tipo, #ddd);
+    border-radius: 8px 8px 0 0;
+}
+
+.atributo-nome {
+    font-size: 0.85rem;
+    text-align: center;
+    overflow-wrap: anywhere;
+}
+
+.card-valores:hover {
+    background-color: rgba(220, 240, 255, 0.2);
+}
+
+@media (max-width: 800px) {
+    .sem-evolucao {
+        position: static;
+        height: auto;
+        margin-top: 12px;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .mensagem-sem-evolucao {
+        position: static;
+    }
+
+    #pokemon-detalhes {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-rows: 360px 260px 240px;
+        grid-template-areas:
+            "pokemon pokemon"
+            "tipos atributos"
+            "estatisticas estatisticas";
+    }
+
+    .card-pokemon .card-img-top {
+        max-width: 250px;
+        align-self: center;
+    }
+}
+
+@media (max-width: 500px) {
+    #pokemon-detalhes {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: 360px 240px 260px 240px;
+        grid-template-areas: "pokemon" "tipos" "atributos" "estatisticas";
+    }
+
+    .grafico-barras {
+        gap: 8px;
+        min-width: 320px;
+    }
 }
