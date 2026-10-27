@@ -1,0 +1,133 @@
+body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #151515;
+
+    display: grid;
+    place-items: center;
+}
+
+.tela > h1 {
+    font-family: 'Chakra Petch', sans-serif;
+    font-weight: 700;
+}
+
+.pokedex {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+
+    background-image: url("Interface futurista de Pokédex vermelha.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.tela {
+    position: absolute;
+    top: 12%;
+    bottom: 13%;
+    left: 8%;
+    right: 8%;
+
+    display: flex;
+    flex-direction: column;
+}
+
+#pokemon-container {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    align-content: start;
+    margin: 0;
+    justify-content: center;
+}
+
+.card {
+    height: 100%;
+
+    background-color: rgba(220, 240, 255, 0.2);
+    text-align: center;
+    transition: background-color 0.2s;
+
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    transition: background-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    backdrop-filter: blur(6px);
+    color: white;
+}
+
+.card:hover {
+    background-color: var(--cor-tipo, #ddd);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.35);
+}
+
+.tipo-grass    { --cor-tipo: #78c850; }
+.tipo-bug      { --cor-tipo: #b4cb38; }
+.tipo-poison   { --cor-tipo: #cd9ae0; }
+.tipo-ghost    { --cor-tipo: #574078; }
+.tipo-normal   { --cor-tipo: #c4c4c4; }
+.tipo-electric { --cor-tipo: #ffe34d; }
+.tipo-fire     { --cor-tipo: #ff9b42; }
+.tipo-water    { --cor-tipo: #79b7f2; }
+.tipo-ice      { --cor-tipo: #c0efff; }
+.tipo-fighting { --cor-tipo: #eb7777; }
+.tipo-ground   { --cor-tipo: #d5b48c; }
+.tipo-flying   { --cor-tipo: #78dfe5; }
+.tipo-psychic  { --cor-tipo: #f6a2c8; }
+.tipo-dark     { --cor-tipo: #292034; }
+.tipo-dragon   { --cor-tipo: #6667d9; }
+.tipo-steel    { --cor-tipo: #b5bec8; }
+
+.pokemon-id,
+.card-title,
+.card-text {
+    font-family: 'Chakra Petch', sans-serif;
+    font-weight: 700;
+}
+
+.tipo-etiqueta {
+    display: inline-block;
+    padding: 3px 10px;
+    margin: 2px;
+    border-radius: 20px;
+    background-color: rgba(0, 0, 0, 0.1);
+    font-size: 0.8rem;
+}
+
+#pokemon-detalhes {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    padding: 15px 15px 15px 5%;
+
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+}
+
+.card-detalhes {
+    width: 600px;
+    max-width: 100%;
+    height: auto;
+    margin-left: 0;
+    min-width: 0;
+}
+
+.card-status {
+    margin-left: auto;
+    width: 480px;
+}
+
+.area-grafico {
+    position: relative;
+    height: 300px;
+}
+
+#pokemon-detalhes > .card-detalhes:not(.card-status) {
+    width: 350px;
+}
